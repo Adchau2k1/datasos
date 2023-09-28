@@ -3,6 +3,10 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 
 const mySwiper = ref({});
+const modalOptions = ref({
+  open: false,
+  data: {}
+})
 const setSwiper = (xswiper) => {
   mySwiper.value = xswiper;
 };
@@ -158,6 +162,14 @@ const dataPackMore = [
     ],
   },
 ];
+
+const handleOpenModal = (item) => {
+  modalOptions.value.open = true
+}
+
+definePageMeta( {
+    colorMode: 'light',
+})
 </script>
 
 <template>
@@ -190,7 +202,8 @@ const dataPackMore = [
         <div class="grid grid-cols-3 gap-5">
           <div
             v-for="(item, index) of dataPackage"
-            class="p-30px rounded-xl border border-blue1"
+            :key="index"
+            class="p-30px rounded-xl duration-500 border border-blue1 shadow-br hover:(shadow-none border-#ededed)"
           >
             <div
               class="relative h-4 rounded-xl bg-gradient-to-r from-blue1 to-blue2"
@@ -198,7 +211,7 @@ const dataPackMore = [
               <IconHot v-if="item.isHot" class="absolute -left-35px -top-3px" />
             </div>
             <h1 class="mt-4 text-xl font-bold">{{ item.tittle }}</h1>
-            <div class="mt-4">
+            <div class="mt-4 cursor-pointer" @click="handleOpenModal(item)">
               <p class="flex gap-2">
                 <IconDownload /> <span class="">Data: {{ item.data }}</span>
               </p>
@@ -210,7 +223,7 @@ const dataPackMore = [
               </p>
             </div>
             <button
-              class="mt-6 w-full py-2 uppercase rounded-lg font-bold text-white bg-gradient-to-r from-blue2 to-blue1"
+              class="mt-6 w-full py-2 uppercase rounded-lg font-bold text-white bg-gradient-to-r from-blue2 to-blue1 hover:(text-#4096ff shadow-btn)"
             >
               Đăng ký ngay
             </button>
@@ -237,7 +250,7 @@ const dataPackMore = [
             <div
               v-for="(pack, idx) of item.data"
               :key="idx"
-              class="p-30px rounded-xl border border-blue1 shadow-br"
+              class="p-30px rounded-xl border border-blue1 shadow-br hover:(shadow-none border-#ededed)"
             >
               <div
                 class="relative h-4 rounded-xl bg-gradient-to-r from-blue1 to-blue2"
@@ -260,7 +273,7 @@ const dataPackMore = [
                 </p>
               </div>
               <button
-                class="mt-6 w-full py-2 uppercase rounded-lg font-bold text-white bg-gradient-to-r from-blue2 to-blue1"
+                class="mt-6 w-full py-2 uppercase rounded-lg font-bold text-white bg-gradient-to-r from-blue2 to-blue1 hover:(text-#4096ff shadow-btn)"
               >
                 Đăng ký ngay
               </button>
@@ -269,5 +282,33 @@ const dataPackMore = [
         </div>
       </div>
     </div>
+
+    <!-- Modal -->
+    <UModal v-model="modalOptions.open" class="relative">
+      <div class="absolute top-5 -left-1 bg-[url('/img/bg-hot.svg')] bg-cover w-66px h-22px flex items-center justify-center text-white">HOT
+      </div>
+      <div class="flex items-center justify-center pt-8 pb-10 text-2xl font-bold text-white bg-blue1 ">
+    D5
+  </div>
+    <div class="mt-9 px-10">
+<h1>Gói Data ngày D5</h1>
+<img src="/img/d5.jpg" loading="lazy"/>
+<span style="color:#E74C3C">&nbsp;😍🗓&nbsp;<strong>Ngày còn dài mà&nbsp;Data đã hết!&nbsp;🤔<br>
+👉&nbsp;Có&nbsp;D5 đến ngay bên bạn!</strong></span>
+    </div>
+    <div class="mt-9 flex gap-8 pb-8 px-10">
+      <button
+      @click="modalOptions.open = false"
+              class="mt-6 w-full py-2 uppercase rounded-lg font-bold border border-solid border-black text-back  to-blue1 hover:(text-#4096ff border-transparent)"
+            >
+              Đóng
+            </button>
+            <button
+              class="mt-6 w-full py-2 uppercase rounded-lg font-bold text-white bg-gradient-to-r from-blue2 to-blue1 hover:(text-#4096ff shadow-btn)"
+            >
+              Đăng ký
+            </button>
+    </div>
+    </UModal>
   </div>
 </template>

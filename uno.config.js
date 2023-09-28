@@ -17,6 +17,7 @@ export default defineConfig({
     },
     boxShadow: {
       br: "6px 6px 0 0 rgba(34,87,193,.2)",
+      btn: "0 3px 6px 0 rgba(34,87,193,.2)"    
     },
   },
 
