@@ -4,5 +4,6 @@ export default defineNuxtConfig({
 
   css: ["~/assets/tailwind.css", "~/assets/global.css"],
 
+  devServer: { HOST: process.env.devUrl },
   devtools: { enabled: true },
 });
