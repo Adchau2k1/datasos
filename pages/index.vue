@@ -1,16 +1,16 @@
 <script setup>
 import { Swiper, SwiperSlide } from "swiper/vue";
-import { Pagination } from "swiper/modules";
+import { Pagination, Autoplay, EffectCreative  } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import 'swiper/css/effect-creative';
 
 const modalOptions = ref({
   open: false,
   data: {},
 });
-const showMoreCurrent = ref(false);
 
-const modules = [Pagination];
+const modules = [Pagination, Autoplay, EffectCreative ];
 const onSwiper = (swiper) => {
   // console.log(swiper);
 };
@@ -312,14 +312,28 @@ definePageMeta({
 
 <template>
   <div class="my-10">
-    <div class="">
+    <div class="cursor-pointer">
       <Swiper
         :modules="modules"
         @swiper="onSwiper"
         :slides-per-view="1"
         :space-between="30"
         :loop="true"
+        :autoplay="{
+      delay: 3000,
+      disableOnInteraction: false,
+    }"
         :pagination="{ clickable: true }"
+        effect='creative'
+        :creativeEffect="{
+      prev: {
+        shadow: true,
+        translate: [0, 0, -400],
+      },
+      next: {
+        translate: ['100%', 0, 0],
+      },
+    }"
         class="!z-0"
       >
         <SwiperSlide v-for="(slide, index) of sliderData" :key="index">
@@ -346,7 +360,8 @@ definePageMeta({
           <div
             v-for="(item, index) of dataPackage"
             :key="index"
-            class="p-4 md:p-30px rounded-xl duration-500 border border-blue1 shadow-br hover:(shadow-none border-#ededed)"
+            @click="handleOpenModal(item)"
+            class="p-4 md:p-30px rounded-xl duration-500 cursor-pointer border border-blue1 shadow-br hover:(shadow-none border-#ededed)"
           >
             <div
               class="relative h-4 rounded-xl bg-gradient-to-r from-blue1 to-blue2"
@@ -360,8 +375,7 @@ definePageMeta({
               {{ item.title }}
             </h1>
             <div
-              class="mt-4 cursor-pointer text-13px md:text-base"
-              @click="handleOpenModal(item)"
+              class="mt-4 text-13px md:text-base"
             >
               <p class="flex gap-2">
                 <IconDownload class="hidden md:block" />
@@ -377,7 +391,8 @@ definePageMeta({
               </p>
             </div>
             <a
-              :href="`sms:5259?&body=${item.title}`"
+              :href="`sms:9318?&body=${item.title}`"
+              @click.stop
               class="flex items-center justify-center mt-6 w-full py-2 uppercase rounded-lg font-bold text-13px md:text-base text-white bg-gradient-to-r from-blue2 to-blue1 hover:(text-#4096ff shadow-btn)"
               >Đăng ký ngay</a
             >
@@ -435,7 +450,7 @@ definePageMeta({
                 </p>
               </div>
               <a
-                :href="`sms:5259?&body=${pack.tittle}`"
+                :href="`sms:9318?&body=${pack.tittle}`"
                 class="flex items-center justify-center mt-6 w-full py-2 uppercase rounded-lg font-bold text-13px md:text-base text-white bg-gradient-to-r from-blue2 to-blue1 hover:(text-#4096ff shadow-btn)"
                 >Đăng ký ngay</a
               >
@@ -466,10 +481,12 @@ definePageMeta({
             class="float-right"
           />
         </div>
-        <div class="lg:w-55%">
+        <div class="lg:w-60%">
           <div
             v-for="(item, index) of topPacks"
-            class="mb-30px lg:w-80% 2xl:w-58% flex lg:items-center bg-white pl-30px pt-22px rounded-tl-10px rounded-tr-50px rounded-bl-50px rounded-br-10px"
+            :key="index"
+            @click="handleOpenModal(item)"
+            class="mb-30px lg:w-80% 2xl:w-58% flex lg:items-center bg-white pl-30px pt-22px cursor-pointer rounded-tl-10px rounded-tr-50px rounded-bl-50px rounded-br-10px"
           >
             <div
               class="relative w-16 h-16 md:(w-30 h-30) lg:(-mt-6) flex items-center justify-center bg-gradient-to-tr from-#2257c1 to-blue2 rounded-md"
@@ -488,23 +505,24 @@ definePageMeta({
                 class="flex flex-col cursor-pointer text-13px mt-6px md:(mt-1 flex-row items-center text-base)"
                 @click="handleOpenModal(item)"
               >
-                <p class="md:w-1/3 flex gap-1">
-                  <IconDownload class="w-4 h-4 md:(w-auto h-auto)" />
+                <div class="mt-2 md:w-1/3 lg:mt-0 flex items-center gap-2">
+                  <IconDownload class="w-4 h-4 md:(w-6 h-6)" />
                   <span class="">Data: {{ item.data }}</span>
-                </p>
-                <p class="md:w-1/3 flex gap-1">
-                  <IconCalender class="w-4 h-4 md:(w-auto h-auto)" />
+                </div>
+                <div class="mt-2 md:w-1/3 lg:mt-0 flex items-center gap-2">
+                  <IconCalender class="w-4 h-4 md:(w-6 h-6)" />
                   <span class="">HSD: {{ item.date }}</span>
-                </p>
-                <p class="md:w-1/3 flex gap-1">
-                  <IconPrice class="w-4 h-4 md:(w-auto h-auto)" />
+                </div>
+                <div class="mt-2 md:w-1/3 lg:mt-0 flex items-center gap-2">
+                  <IconPrice class="w-4 h-4 md:(w-6 h-6)" />
                   <span class=""
                     >Giá: {{ formatNumberView(item.price) }} đ</span
                   >
-                </p>
+                </div>
               </div>
               <a
-                :href="`sms:5259?&body=${item.title}`"
+                :href="`sms:9318?&body=${item.title}`"
+                @click.stop
                 class="flex items-center justify-center mt-2 mb-5 w-140px md:(w-250px mt-6) py-3 uppercase rounded-lg text-13px md:text-base font-bold text-white bg-gradient-to-r from-blue2 to-blue1 hover:(text-#4096ff shadow-btn)"
                 >Đăng ký ngay</a
               >
@@ -514,14 +532,14 @@ definePageMeta({
           <button
             v-if="topPacks.length < dataPackage.length"
             @click="handleShowMore"
-            class="mb-10 w-full lg:w-80% 2xl:w-58% h-50px uppercase font-bold text-sm md:text-base rounded-md border-1px border-dashed border-white text-white"
+            class="mb-10 w-full lg:w-80% 2xl:w-58% h-42px md:h-50px uppercase font-bold text-sm md:text-base rounded-md border-1px border-dashed border-white text-white"
           >
             Xem thêm
           </button>
           <button
             v-else
             @click="handleShowLess"
-            class="mb-10 w-full lg:w-80% 2xl:w-58% h-50px uppercase font-bold text-sm md:text-base rounded-md border-1px border-dashed border-white text-white"
+            class="mb-10 w-full lg:w-80% 2xl:w-58% h-42px md:h-50px uppercase font-bold text-sm md:text-base rounded-md border-1px border-dashed border-white text-white"
           >
             Thu gọn
           </button>
@@ -529,7 +547,7 @@ definePageMeta({
       </div>
     </div>
 
-    <div class="h-490px bg-[url('/img/bg.svg')] bg-cover px-4 lg:px-0">
+    <div class="h-400px md:h-490px bg-[url('/img/bg.svg')] bg-cover px-4 lg:px-0">
       <div
         class="h-full flex justify-center flex-col lg:(w-1024px justify-normal items-center flex-row mx-auto)"
       >
@@ -538,24 +556,25 @@ definePageMeta({
             <h1 class="text-2xl font-bold">
               Bạn đã cài ứng dụng MyMobiFone chưa?
             </h1>
-            <p class="mt-3 text-2xl font-normal">
+            <p class="mt-3 text-xl md:text-2xl font-normal">
               Cài ứng dụng My MobiFone để tận hưởng nhiều tiện ích và dịch vụ
               hơn!
             </p>
           </div>
         </div>
         <div
-          class="mt-6 flex flex-col gap-2 md:(flex-row gap-4) lg:(mt-0 w-1/2 justify-end)"
+          class="mt-6 flex md:gap-6 lg:(mt-0 w-1/2)"
         >
           <a
             href="https://play.google.com/store/search?q=my%20mobifone&amp;c=apps&amp;hl=vi-VN"
+            class="block"
           >
-            <IconGplay
+            <IconGplay class="mx-auto w-80% md:w-full"
           /></a>
           <a
             href="https://apps.apple.com/vn/app/my-mobifone/id719320091?l=vi"
-            class="block mt-4 md:mt-0"
-            ><IconAppStore
+            class="block"
+            ><IconAppStore class="mx-auto w-80% md:w-full"
           /></a>
         </div>
       </div>
@@ -565,20 +584,21 @@ definePageMeta({
     <UModal
       v-model="modalOptions.open"
       prevent-close
-      class="relative max-h-90vh"
+      class="relative"
     >
       <div
         v-if="modalOptions.data.isHot"
-        class="absolute top-5 -left-1 bg-[url('/img/bg-hot.svg')] bg-cover w-66px h-22px flex items-center justify-center text-white"
+        class="absolute top-6 md:top-5 -left-1 bg-[url('/img/bg-hot.svg')] bg-cover w-66px h-22px flex items-center justify-center text-white"
       >
         HOT
       </div>
       <div
-        class="flex items-center justify-center pt-8 pb-10 text-2xl font-bold text-white bg-blue1"
-      >
-        {{ modalOptions.data.title }}
-      </div>
-      <div class="mt-4 px-4 md:(mt-9 px-10)">
+      class="flex items-center justify-center py-5 md(pt-8 pb-10) text-2xl font-bold text-white bg-blue1"
+    >
+      {{ modalOptions.data.title }}
+    </div>
+      <div class="max-h-65vh overflow-y-auto">
+      <div class="mt-4 px-4 md:(px-10)">
         <h1 class="text-2xl font-bold">{{ modalOptions.data.title }}</h1>
         <img :src="modalOptions.data.imgUrl" loading="lazy" class="mt-2" />
         <p class="mt-1 text-center font-bold text-red-500">
@@ -593,7 +613,8 @@ definePageMeta({
           </div>
         </div>
       </div>
-      <div class="mt-4 flex gap-8 pb-8 px-10">
+      </div>
+      <div class="mt-0 pb-6 md:(mt-4 pb-8) flex gap-8 px-10">
         <button
           @click="modalOptions.open = false"
           class="mt-6 w-full py-2 uppercase rounded-lg text-13px lg:text-base font-bold border border-solid border-black text-back to-blue1 hover:(text-#4096ff border-transparent)"
@@ -601,7 +622,7 @@ definePageMeta({
           Đóng
         </button>
         <a
-          :href="`sms:5259?&body=${modalOptions.data.title}`"
+          :href="`sms:9318?&body=${modalOptions.data.title}`"
           class="flex items-center justify-center mt-6 w-full py-2 uppercase rounded-lg text-13px lg:text-base font-bold text-white bg-gradient-to-r from-blue2 to-blue1 hover:(text-#4096ff shadow-btn)"
           >Đăng ký</a
         >

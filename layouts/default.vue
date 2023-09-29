@@ -1,5 +1,6 @@
 <script setup>
 const route = useRoute()
+const yeahNow = new Date().getFullYear()
 
 const forList = ["Tất cả", "Cho bạn", "Gói top", "Gói hot"];
 const packList = ["Tất cả", "Gói ngày", "Gói tuần", "Gói tháng"];
@@ -68,8 +69,8 @@ const handleSearch = () => {
         <div class="lg:w-1/2">
           <div><img src="/img/logo.svg" loading="lazy" class="w-215px" /></div>
           <h2 class="mt-5 font-bold">Tổng công ty Viễn thông MobiFone</h2>
-          <p class="flex gap-3"><IconCall /> (+84-24) 3783 1800</p>
-          <p class="flex gap-3"><div class="w-4 h-4"></div> (+84-24) 3783 1734</p>
+          <p class="mt-1 flex items-center gap-3"><IconCall /> (+84-24) 3783 1800</p>
+          <p class="flex items-center gap-3"><div class="w-4 h-4"></div> (+84-24) 3783 1734</p>
           <p class="flex items-center gap-3">
             <IconLocal /> Số 01 phố Phạm Văn Bạch, Yên Hòa, Cầu Giấy, Hà Nội.
           </p>
@@ -87,7 +88,7 @@ const handleSearch = () => {
         </div>
       </div>
       <div class="mt-8 text-#656565 bg-gray-200 py-5 lg:(py-50px mt-12) text-center">
-        ©2023 By TTCNTT MobiFone
+        ©{{yeahNow}} By TTCNTT MobiFone
       </div>
     </footer>
 
