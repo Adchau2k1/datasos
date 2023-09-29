@@ -24,31 +24,33 @@ const handleSearch = () => {
     <header class="z-50 fixed inset-0 h-70px md:h-96px bg-#caefff">
       <div class="hidden px-4 h-full mx-auto md:(flex items-center justify-between gap-12) lg:(w-1024px px-0 gap-0)">
         <NuxtLink to="/"><img src="/img/logo.svg" loading="lazy" class="w-215px" /></NuxtLink>
-        <div v-if="route.path !== '/search'" class="flex w-70%">
+        <!-- <div v-if="route.path !== '/search'" class="flex w-70%">
           <div class="relative w-full">
             <input
+            @keyup.enter="handleSearch"
               placeholder="Tìm gói..."
               class="w-full h-10 pl-3 pr-11 rounded-md border border-transparent focus:( border-blue1) outline-none"
             />
             <button @click="handleSearch"><IconSearch class="absolute top-1/2 -translate-y-1/2 right-3" /></button>
           </div>
           <button @click="modalOptions.open = true" class="ml-3"><IconFilter /></button>
-        </div>
+        </div> -->
       </div>
 
       <!-- Header mobile -->
       <div class="relative h-full md:hidden">
         <div class="w-full h-full flex justify-between items-center px-4 z-50">
           <NuxtLink to="/"><img src="/img/logo.svg" loading="lazy" class="w-136px" /></NuxtLink>
-          <div v-if="route.path !== '/search'" class="flex justify-end gap-4">
+          <!-- <div v-if="route.path !== '/search'" class="flex justify-end gap-4">
             <button @click="openMobileSearch = true"><IconSearch class="" /></button>
             <button @click="modalOptions.open = true" class=""><IconFilter /></button>
-          </div>
+          </div> -->
         </div>
 
         <div :class="`absolute inset-0 flex items-center justify-between px-4 transition-all duration-300 ease-in-out bg-#caefff z-100 ${!openMobileSearch ? '-translate-y-full': 'translate-y-0' }`">
           <div class="relative w-full">
             <input
+            @keyup.enter="handleSearch"
               placeholder="Tìm gói..."
               class="w-full h-10 pl-3 pr-11 rounded-md border border-transparent focus:( border-blue1) outline-none"
             />

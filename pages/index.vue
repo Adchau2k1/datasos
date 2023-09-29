@@ -1,15 +1,18 @@
 <script setup>
 import { Swiper, SwiperSlide } from "swiper/vue";
+import { Pagination } from "swiper/modules";
 import "swiper/css";
+import "swiper/css/pagination";
 
 const modalOptions = ref({
   open: false,
   data: {},
 });
+const showMoreCurrent = ref(false);
 
-const mySwiper = ref({});
-const setSwiper = (xswiper) => {
-  mySwiper.value = xswiper;
+const modules = [Pagination];
+const onSwiper = (swiper) => {
+  // console.log(swiper);
 };
 
 const sliderData = [
@@ -27,38 +30,159 @@ const sliderData = [
 const dataPackage = [
   {
     isHot: true,
-    tittle: "D10",
-    data: "8Gb",
-    date: "1 ngày",
-    price: 10000,
-  },
-  {
-    isHot: true,
-    tittle: "MBF30",
-    data: "30GB",
+    title: "NA70",
+    data: "10GB",
     date: "30 ngày",
-    price: 30000,
+    price: 70000,
+    imgUrl: "/img/na70.jpg",
+    metaData: {
+      hotText: "GÓI MÊ LY - DATA ONLY",
+      contents: [
+        "💎 Cước phí: 70.000 VNĐ",
+        "🎁 Ưu đãi: Data 10GB/chu kỳ (chu kỳ 30 ngày) - Hết dung lượng, tạm khóa internet.",
+        "⏳ Thời gian sử dụng trong 30 ngày.",
+        "👥 Đối tượng sử dụng: Toàn bộ thuê bao di động trả trước, trả sau ",
+        "✅ Hệ thống tự động gia hạn gói cước; nếu gia hạn gói không thành công, hệ thống tiếp tục retry 30 ngày.",
+        "❌ Hủy gia hạn gói cước: Soạn KGH NA70 gửi 789",
+        "❌ Hủy gói cước: Soạn HUY NA70 gửi 789 hoặc click Hủy tại mục gói NA70 ngay trên My MobiFone.",
+        "👉 Đăng ký ngay để được hưởng ưu đãi bạn nhé! ️❤️",
+        "☎ Mọi thông tin chi tiết vui lòng liên hệ hotline 1800 1090.",
+      ],
+    },
   },
   {
     isHot: true,
-    tittle: "D5",
-    data: "8Gb",
-    date: "1 ngày",
-    price: 10000,
+    title: "MBF30",
+    data: "30GB",
+    date: "7 ngày",
+    price: 30000,
+    imgUrl: "/img/mbf30.jpg",
+    metaData: {
+      hotText:
+        "🎇 Đánh dấu cột mốc 30 năm phát triển, MobiFone tung ra gói cước MBF30 với deal siêu hời! 😊",
+      contents: [
+        "🎁 Chỉ 30k mà nhận được 30GB sử dụng trong 07 ngày!",
+        "📍 MBF30 quả là chân ái phải không quý zị!",
+        "🎁 Ngoài ra quý khách có thể tặng gói cước này cho người thân, bạn bè.",
+        "📱 Chương trình áp dụng với tất cả thuê bao trả trước, trả sau của",
+        "MobiFone. Không giới hạn số lần đăng ký gói cước trong thời gian triển khai chương trình.",
+        " ☎  Mọi thông tin chi tiết vui lòng liên hệ hotline 1800 1090.",
+      ],
+    },
+  },
+  {
+    isHot: true,
+    title: "NA90",
+    data: "15GB",
+    date: "30 ngày",
+    price: 90000,
+    imgUrl: "/img/na90.jpg",
+    metaData: {
+      hotText: "GÓI MÊ LY - DATA ONLY",
+      contents: [
+        "💎 Cước phí: 90.000 VNĐ.",
+        "🎁 Ưu đãi: Data 15GB/chu kỳ (chu kỳ 30 ngày) - Hết dung lượng, tạm khóa internet.",
+        "⏳ Thời gian sử dụng trong 30 ngày.",
+        "👥 Đối tượng sử dụng: Toàn bộ thuê bao di động trả trước, trả sau .",
+        "✅ Hệ thống tự động gia hạn gói cước; nếu gia hạn gói không thành công, hệ thống tiếp tục retry 30 ngày.",
+        "❌ Hủy gia hạn gói cước: Soạn KGH NA90 gửi 789",
+        "❌ Hủy gói cước: Soạn HUY NA90 gửi 789 hoặc click Hủy tại mục gói NA90 ngay trên My MobiFone.",
+        "👉 Đăng ký ngay để được hưởng ưu đãi bạn nhé! ️❤️",
+        "☎ Mọi thông tin chi tiết vui lòng liên hệ hotline 1800 1090.",
+      ],
+    },
   },
   {
     isHot: false,
-    tittle: "D5",
-    data: "8Gb",
-    date: "1 ngày",
-    price: 10000,
+    title: "PT70",
+    data: "1GB/ngày",
+    date: "30 ngày",
+    price: 70000,
+    imgUrl: "/img/pt70.jpg",
+    metaData: {
+      hotText: "GÓI MÊ LY - DATA ONLY",
+      contents: [
+        "💎 Cước phí: 70.000 VNĐ.",
+        "🎁 Ưu đãi: Data 1GB/ngày tương đương 30GB/30 ngày (hết dung lượng, tạm khóa internet).",
+        "⏳ Thời gian sử dụng trong 30 ngày.",
+        "👥 Đối tượng sử dụng: Thuê bao phát triển mới từ ngày 15/6/2023 (bao gồm Thuê bao trả trước, thuê bao trả sau).",
+        "✅ Hệ thống tự động gia hạn gói cước; nếu gia hạn gói không thành công, hệ thống tiếp tục retry 30 ngày.",
+        "❌ Hủy gia hạn gói cước: Soạn KGH PT70 gửi 789",
+        "❌ Hủy gói cước: Soạn HUY PT70 gửi 789 hoặc click Hủy tại mục gói PT70 ngay trên My MobiFone.",
+        "👉 Đăng ký ngay để được hưởng ưu đãi bạn nhé! ️❤️",
+        "☎ Mọi thông tin chi tiết vui lòng liên hệ hotline 1800 1090.",
+      ],
+    },
   },
   {
     isHot: false,
-    tittle: "D5",
-    data: "8Gb",
-    date: "1 ngày",
-    price: 10000,
+    title: "PT90",
+    data: "1,5GB/ngày",
+    date: "30 ngày",
+    price: 90000,
+    imgUrl: "/img/pt90.jpg",
+    metaData: {
+      hotText: "GÓI MÊ LY - DATA ONLY",
+      contents: [
+        "💎 Cước phí: 90.000 VNĐ.",
+        "🎁 Ưu đãi: Data 1.5GB/ngày tương đương 45GB/30 ngày (hết dung lượng, dừng truy cập).",
+        "⏳ Thời gian sử dụng trong 30 ngày.",
+        "👥 Đối tượng sử dụng: Thuê bao phát triển mới từ ngày 15/6/2023 (bao gồm Thuê bao trả trước, trả sau).",
+        "✅ Hệ thống tự động gia hạn gói cước; nếu gia hạn gói không thành công, hệ thống tiếp tục retry 30 ngày.",
+        "❌ Hủy gia hạn gói cước: Soạn KGH PT90 gửi 789",
+        "❌ Hủy gói cước: Soạn HUY PT90 gửi 789 hoặc click Hủy tại mục gói PT90 ngay trên My MobiFone.",
+        "👉 Đăng ký ngay để được hưởng ưu đãi bạn nhé! ️❤️",
+        "☎ Mọi thông tin chi tiết vui lòng liên hệ hotline 1800 1090.",
+      ],
+    },
+  },
+  {
+    isHot: false,
+    title: "KC90",
+    data: "1GB/ngày",
+    date: "30 ngày",
+    price: 90000,
+    imgUrl: "/img/kc90.jpg",
+    metaData: {
+      hotText: "GÓI CƯỚC COMBO DATA VÀ THOẠI",
+      contents: [
+        "💎 Cước phí: 90.000 VNĐ.",
+        "🎁 Ưu đãi: Data 1GB/ngày tương đương 30GB/30 ngày (hết dung lượng, dừng truy cập).",
+        "Thoại nội mạng: Miễn phí các cuộc gọi nội mạng dưới 10 phút (Tối đa 1.000 phút thoại nội mạng/tháng).",
+        "Miễn phí 30 phút thoại ngoại mạng/tháng.",
+        "⏳ Thời gian sử dụng trong 30 ngày.",
+        "👥 Đối tượng sử dụng: Thuê bao trả trước, trả sau phát triển mới từ ngày 15/6/2023; Thuê bao trả trước, trả sau hiện hữu theo điều kiện tiêu dùng (ARPU data + thoại trung bình tháng n-1, n-2, n-3 < giá gói).",
+        "✅ Hệ thống tự động gia hạn gói cước; nếu gia hạn gói không thành công, hệ thống tiếp tục retry 30 ngày.",
+        "❌ Hủy gia hạn gói cước: Soạn KGH KC90 gửi 789",
+        "❌ Hủy gói cước: Soạn HUY KC90 gửi 789 hoặc click Hủy tại mục gói KC90 ngay trên My MobiFone.",
+        "👉 Đăng ký ngay để được hưởng ưu đãi bạn nhé! ️❤️",
+        "☎ Mọi thông tin chi tiết vui lòng liên hệ hotline 1800 1090.",
+      ],
+    },
+  },
+  {
+    isHot: false,
+    title: "KC120",
+    data: "1,5GB/ngày",
+    date: "30 ngày",
+    price: 120000,
+    imgUrl: "/img/kc120.jpg",
+    metaData: {
+      hotText: "GÓI CƯỚC COMBO DATA VÀ THOẠI",
+      contents: [
+        "💎 Cước phí: 120.000 VNĐ.",
+        "🎁 Ưu đãi: Data 1.5GB/ngày tương đương 45GB/30 ngày (hết dung lượng, dừng truy cập).",
+        "Miễn phí các cuộc gọi nội mạng dưới 10 phút (Tối đa 1.500 phút thoại nội mạng/30 ngày).",
+        "Miễn phí 50 phút thoại ngoại mạng/30 ngày.",
+        "⏳ Thời gian sử dụng trong 30 ngày.",
+        "👥 Đối tượng sử dụng: Thuê bao trả trước, trả sau phát triển mới từ ngày 15/6/2023; Thuê bao trả trước, trả sau hiện hữu theo điều kiện tiêu dùng (ARPU data + thoại trung bình tháng n-1, n-2, n-3 < giá gói).",
+        "✅ Hệ thống tự động gia hạn gói cước; nếu gia hạn gói không thành công, hệ thống tiếp tục retry 30 ngày.",
+        "❌ Hủy gia hạn gói cước: Soạn KGH KC120 gửi 789",
+        "❌ Hủy gói cước: Soạn HUY KC120 gửi 789 hoặc click Hủy tại mục gói KC120 ngay trên My MobiFone.",
+        "👉 Đăng ký ngay để được hưởng ưu đãi bạn nhé! ️❤️",
+        "☎ Mọi thông tin chi tiết vui lòng liên hệ hotline 1800 1090.",
+      ],
+    },
   },
 ];
 
@@ -164,32 +288,21 @@ const dataPackMore = [
   },
 ];
 
-const topPacks = [
-  {
-    isHot: true,
-    tittle: "D10",
-    data: "8Gb",
-    date: "1 ngày",
-    price: 10000,
-  },
-  {
-    isHot: true,
-    tittle: "MBF30",
-    data: "30GB",
-    date: "30 ngày",
-    price: 30000,
-  },
-  {
-    isHot: true,
-    tittle: "D5",
-    data: "8Gb",
-    date: "1 ngày",
-    price: 10000,
-  },
-];
+const topPacks = ref(dataPackage.slice(0, 3));
 
 const handleOpenModal = (item) => {
   modalOptions.value.open = true;
+  modalOptions.value.data = item;
+};
+
+let current = 1;
+const handleShowMore = () => {
+  current += 1;
+  topPacks.value = dataPackage.slice(0, current * 3);
+};
+const handleShowLess = () => {
+  current = 1;
+  topPacks.value = dataPackage.slice(0, current * 3);
 };
 
 definePageMeta({
@@ -201,10 +314,12 @@ definePageMeta({
   <div class="my-10">
     <div class="">
       <Swiper
-        @swiper="setSwiper"
+        :modules="modules"
+        @swiper="onSwiper"
         :slides-per-view="1"
         :space-between="30"
         :loop="true"
+        :pagination="{ clickable: true }"
         class="!z-0"
       >
         <SwiperSlide v-for="(slide, index) of sliderData" :key="index">
@@ -242,7 +357,7 @@ definePageMeta({
               />
             </div>
             <h1 class="mt-2 text-lg md:(mt-4 text-xl) font-bold">
-              {{ item.tittle }}
+              {{ item.title }}
             </h1>
             <div
               class="mt-4 cursor-pointer text-13px md:text-base"
@@ -258,25 +373,25 @@ definePageMeta({
               </p>
               <p class="flex gap-2 mt-2 md:mt-3">
                 <IconPrice class="hidden md:block" />
-                <span class="">Giá: {{ item.price }}</span>
+                <span class="">Giá: {{ formatNumberView(item.price) }} đ</span>
               </p>
             </div>
             <a
-              :href="`sms:5259?&body=${item.tittle}`"
+              :href="`sms:5259?&body=${item.title}`"
               class="flex items-center justify-center mt-6 w-full py-2 uppercase rounded-lg font-bold text-13px md:text-base text-white bg-gradient-to-r from-blue2 to-blue1 hover:(text-#4096ff shadow-btn)"
               >Đăng ký ngay</a
             >
           </div>
         </div>
 
-        <button
+        <!-- <button
           class="mt-10 w-full py-1 flex justify-center rounded-lg font-bold text-blue1 bg-[rgba(34,87,193,.1)]"
         >
           Xem thêm <IconShowMore />
-        </button>
+        </button> -->
       </div>
 
-      <div class="">
+      <!-- <div class="">
         <div v-for="(item, index) of dataPackMore" :key="index" class="mt-8">
           <div class="border-b border-b-blue2">
             <div
@@ -333,7 +448,7 @@ definePageMeta({
         >
           Xem thêm <IconShowMore />
         </button>
-      </div>
+      </div> -->
     </div>
 
     <div class="clip-path bg-gradient-to-tr from-#2257c1 to-blue2">
@@ -359,15 +474,15 @@ definePageMeta({
             <div
               class="relative w-16 h-16 md:(w-30 h-30) lg:(-mt-6) flex items-center justify-center bg-gradient-to-tr from-#2257c1 to-blue2 rounded-md"
             >
-              <IconCircleLeft class="absolute left-0 -bottom-34px" />
-              <IconCircleRight class="absolute top-0 -right-11px" />
+              <IconCircleLeft class="absolute -left-2 -bottom-16px" />
+              <IconCircleRight class="absolute -top-2 -right-8px" />
               <span class="text-sm md:text-3xl font-bold text-white">{{
-                item.tittle
+                item.title
               }}</span>
             </div>
             <div class="ml-4 flex-1">
               <h1 class="text-2xl font-bold">
-                {{ item.tittle }}
+                {{ item.title }}
               </h1>
               <div
                 class="flex flex-col cursor-pointer text-13px mt-6px md:(mt-1 flex-row items-center text-base)"
@@ -383,11 +498,13 @@ definePageMeta({
                 </p>
                 <p class="md:w-1/3 flex gap-1">
                   <IconPrice class="w-4 h-4 md:(w-auto h-auto)" />
-                  <span class="">Giá: {{ item.price }}</span>
+                  <span class=""
+                    >Giá: {{ formatNumberView(item.price) }} đ</span
+                  >
                 </p>
               </div>
               <a
-                :href="`sms:5259?&body=${item.tittle}`"
+                :href="`sms:5259?&body=${item.title}`"
                 class="flex items-center justify-center mt-2 mb-5 w-140px md:(w-250px mt-6) py-3 uppercase rounded-lg text-13px md:text-base font-bold text-white bg-gradient-to-r from-blue2 to-blue1 hover:(text-#4096ff shadow-btn)"
                 >Đăng ký ngay</a
               >
@@ -395,9 +512,18 @@ definePageMeta({
           </div>
 
           <button
+            v-if="topPacks.length < dataPackage.length"
+            @click="handleShowMore"
             class="mb-10 w-full lg:w-80% 2xl:w-58% h-50px uppercase font-bold text-sm md:text-base rounded-md border-1px border-dashed border-white text-white"
           >
             Xem thêm
+          </button>
+          <button
+            v-else
+            @click="handleShowLess"
+            class="mb-10 w-full lg:w-80% 2xl:w-58% h-50px uppercase font-bold text-sm md:text-base rounded-md border-1px border-dashed border-white text-white"
+          >
+            Thu gọn
           </button>
         </div>
       </div>
@@ -442,6 +568,7 @@ definePageMeta({
       class="relative max-h-90vh"
     >
       <div
+        v-if="modalOptions.data.isHot"
         class="absolute top-5 -left-1 bg-[url('/img/bg-hot.svg')] bg-cover w-66px h-22px flex items-center justify-center text-white"
       >
         HOT
@@ -449,30 +576,35 @@ definePageMeta({
       <div
         class="flex items-center justify-center pt-8 pb-10 text-2xl font-bold text-white bg-blue1"
       >
-        D5
+        {{ modalOptions.data.title }}
       </div>
-      <div class="mt-9 px-10">
-        <h1 class="text-2xl font-bold">D5</h1>
-        <img src="/img/d5.jpg" loading="lazy" class="mt-2" />
-        <span style="color: #e74c3c"
-          >&nbsp;😍🗓&nbsp;<strong
-            >Ngày còn dài mà&nbsp;Data đã hết!&nbsp;🤔<br />
-            👉&nbsp;Có&nbsp;D5 đến ngay bên bạn!</strong
-          ></span
-        >
+      <div class="mt-4 px-4 md:(mt-9 px-10)">
+        <h1 class="text-2xl font-bold">{{ modalOptions.data.title }}</h1>
+        <img :src="modalOptions.data.imgUrl" loading="lazy" class="mt-2" />
+        <p class="mt-1 text-center font-bold text-red-500">
+          {{ modalOptions.data.metaData.hotText }}
+        </p>
+        <div class="mt-3">
+          <div
+            v-for="(item, index) of modalOptions.data.metaData.contents"
+            :key="index"
+          >
+            {{ item }}
+          </div>
+        </div>
       </div>
-      <div class="mt-9 flex gap-8 pb-8 px-10">
+      <div class="mt-4 flex gap-8 pb-8 px-10">
         <button
           @click="modalOptions.open = false"
           class="mt-6 w-full py-2 uppercase rounded-lg text-13px lg:text-base font-bold border border-solid border-black text-back to-blue1 hover:(text-#4096ff border-transparent)"
         >
           Đóng
         </button>
-        <button
-          class="mt-6 w-full py-2 uppercase rounded-lg text-13px lg:text-base font-bold text-white bg-gradient-to-r from-blue2 to-blue1 hover:(text-#4096ff shadow-btn)"
+        <a
+          :href="`sms:5259?&body=${modalOptions.data.title}`"
+          class="flex items-center justify-center mt-6 w-full py-2 uppercase rounded-lg text-13px lg:text-base font-bold text-white bg-gradient-to-r from-blue2 to-blue1 hover:(text-#4096ff shadow-btn)"
+          >Đăng ký</a
         >
-          Đăng ký
-        </button>
       </div>
     </UModal>
   </div>

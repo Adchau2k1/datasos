@@ -27,15 +27,3 @@ a {
 .clip-path-slide {
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 20px), 70% 100%, 0 100%);
 }
-
-@keyframes slideDown {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  to {
-    opacity: 0;
-    display: none;
-  }
-}
