@@ -40,7 +40,7 @@ onMounted(() => {
   <div>
     <header class="z-50 fixed inset-0 h-70px md:h-96px bg-#caefff">
       <div class="hidden px-4 h-full mx-auto md:(flex items-center justify-between gap-12) lg:(w-1024px px-0 gap-0)">
-        <NuxtLink to="/"><img src="/img/logo.svg" loading="lazy" class="w-215px h-auto" /></NuxtLink>
+        <NuxtLink to="/"><img src="/img/logo.svg" loading="lazy" alt="logo" class="w-215px h-full" /></NuxtLink>
         <!-- <div v-if="route.path !== '/search'" class="flex w-70%">
           <div class="relative w-full">
             <input
@@ -48,7 +48,7 @@ onMounted(() => {
               placeholder="Tìm gói..."
               class="w-full h-10 pl-3 pr-11 rounded-md border border-transparent focus:( border-blue1) outline-none"
             />
-            <button @click="handleSearch"><IconSearch class="absolute top-1/2 -translate-y-1/2 right-3" /></button>
+            <button aria-label="btn-search" @click="handleSearch"><IconSearch class="absolute top-1/2 -translate-y-1/2 right-3" /></button>
           </div>
           <button @click="modalOptions.open = true" class="ml-3"><IconFilter /></button>
         </div> -->
@@ -57,7 +57,7 @@ onMounted(() => {
       <!-- Header mobile -->
       <div class="relative h-full md:hidden">
         <div class="w-full h-full flex justify-between items-center px-4 z-50">
-          <NuxtLink to="/"><img src="/img/logo.svg" loading="lazy" class="w-136px h-auto" /></NuxtLink>
+          <NuxtLink to="/"><img src="/img/logo.svg" loading="lazy" alt="logo" class="w-136px h-full" /></NuxtLink>
           <!-- <div v-if="route.path !== '/search'" class="flex justify-end gap-4">
             <button @click="openMobileSearch = true"><IconSearch class="" /></button>
             <button @click="modalOptions.open = true" class=""><IconFilter /></button>
@@ -75,9 +75,11 @@ onMounted(() => {
               placeholder="Tìm gói..."
               class="w-full h-10 pl-3 pr-11 rounded-md border border-transparent focus:( border-blue1) outline-none"
             />
-            <button @click="handleSearch"><IconSearch class="absolute top-1/2 -translate-y-1/2 right-3" /></button>
+            <button aria-label="btn-search" @click="handleSearch">
+              <IconSearch class="absolute top-1/2 -translate-y-1/2 right-3" />
+            </button>
           </div>
-          <button @click="openMobileSearch = false" class="ml-3"><IconClose /></button>
+          <button aria-label="btn" @click="openMobileSearch = false" class="ml-3"><IconClose /></button>
         </div>
       </div>
     </header>
@@ -87,7 +89,7 @@ onMounted(() => {
     <footer class="pt-0 lg:pt-4">
       <div class="mx-auto px-4 flex flex-col lg:(px-0 w-1024px flex-row)">
         <div class="lg:w-1/2">
-          <div><img src="/img/logo.svg" loading="lazy" class="w-215px h-auto" /></div>
+          <div><img src="/img/logo.svg" loading="lazy" class="w-215px h-full" alt="logo" /></div>
           <h2 class="mt-5 font-bold">Tổng công ty Viễn thông MobiFone</h2>
           <p class="mt-1 flex items-center gap-3"><IconCall /> (+84-24) 3783 1800</p>
           <p class="flex items-center gap-3"><IconCall class="opacity-0" /> (+84-24) 3783 1734</p>
@@ -98,6 +100,7 @@ onMounted(() => {
             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14896.935309649289!2d105.789239!3d21.023328!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ab519542a95f%3A0x3affdd6cd059dffd!2zVOG7lW5nIEPDtG5nIHR5IFZp4buFbiB0aMO0bmcgTW9iaWZvbmU!5e0!3m2!1svi!2sus!4v1695955888016!5m2!1svi!2sus"
             width="100%"
             height="100%"
+            title="map"
             style="border: 0"
             allowfullscreen=""
             loading="lazy"

@@ -11,19 +11,16 @@ const modalOptions = ref({
 })
 
 const modules = [Pagination, Autoplay, EffectCreative]
-const onSwiper = (swiper) => {
-  // console.log(swiper);
-}
 
 const sliderData = [
   {
-    imgUrl: '/img/slide1.jpg',
+    imgUrl: '/img/slide1.webp',
   },
   {
-    imgUrl: '/img/slide3.jpg',
+    imgUrl: '/img/slide3.webp',
   },
   {
-    imgUrl: '/img/slide2.jpg',
+    imgUrl: '/img/slide2.webp',
   },
 ]
 
@@ -84,7 +81,7 @@ const dataPackage = [
     data: '1GB/ngày',
     date: '30 ngày',
     price: 70000,
-    imgUrl: '/img/pt70.jpg',
+    imgUrl: '/img/pt70.webp',
     metaData: {
       hotText: 'GÓI MÊ LY - DATA ONLY',
       contents: [
@@ -106,7 +103,7 @@ const dataPackage = [
     data: '1,5GB/ngày',
     date: '30 ngày',
     price: 90000,
-    imgUrl: '/img/pt90.jpg',
+    imgUrl: '/img/pt90.webp',
     metaData: {
       hotText: 'GÓI MÊ LY - DATA ONLY',
       contents: [
@@ -128,7 +125,7 @@ const dataPackage = [
     data: '10GB',
     date: '30 ngày',
     price: 70000,
-    imgUrl: '/img/na70.jpg',
+    imgUrl: '/img/na70.webp',
     metaData: {
       hotText: 'GÓI MÊ LY - DATA ONLY',
       contents: [
@@ -169,7 +166,7 @@ const dataPackage = [
     data: '15GB',
     date: '30 ngày',
     price: 90000,
-    imgUrl: '/img/na90.jpg',
+    imgUrl: '/img/na90.webp',
     metaData: {
       hotText: 'GÓI MÊ LY - DATA ONLY',
       contents: [
@@ -316,7 +313,6 @@ definePageMeta({
     <div class="cursor-pointer">
       <Swiper
         :modules="modules"
-        @swiper="onSwiper"
         :slides-per-view="1"
         :space-between="30"
         :loop="true"
@@ -345,10 +341,10 @@ definePageMeta({
 
     <div class="px-4 lg:(w-1024px px-0) relative mx-auto mb-10">
       <div class="hidden lg:block absolute -top-10 left-0">
-        <img src="/img/banner.svg" loading="lazy" />
+        <img src="/img/banner.svg" loading="lazy" alt="banner" class="w-full h-full" />
       </div>
       <div class="lg:hidden absolute -top-5 -left-0">
-        <img src="/img/banner-mobile.svg" loading="lazy" />
+        <img src="/img/banner-mobile.svg" loading="lazy" alt="banner" class="w-full h-full" />
       </div>
 
       <div class="pt-6 md:pt-16">
@@ -464,7 +460,7 @@ definePageMeta({
       </h1>
       <div class="lg:(flex items-center) gap-x-12 px-4 lg:px-0">
         <div class="w-40% hidden lg:block">
-          <img src="/img/top-addon.svg" alt="addon" loading="lazy" class="float-right" />
+          <img src="/img/top-addon.webp" alt="addon" loading="lazy" class="w-full h-full float-right" />
         </div>
         <div class="lg:w-60%">
           <div
@@ -528,7 +524,7 @@ definePageMeta({
       </div>
     </div>
 
-    <div class="h-400px md:h-490px bg-[url('/img/bg.jpg')] bg-cover bg-center px-4 lg:px-0">
+    <div class="h-400px md:h-490px bg-[url('/img/bg.webp')] bg-cover bg-center px-4 lg:px-0">
       <div class="h-full flex justify-center flex-col lg:(w-1024px justify-normal items-center flex-row mx-auto)">
         <div class="lg:(w-1/2)">
           <div class="text-white">
@@ -539,10 +535,14 @@ definePageMeta({
           </div>
         </div>
         <div class="mt-6 flex md:gap-6 lg:(mt-0 w-1/2 justify-end)">
-          <a href="https://play.google.com/store/search?q=my%20mobifone&amp;c=apps&amp;hl=vi-VN" class="block">
+          <a
+            href="https://play.google.com/store/search?q=my%20mobifone&amp;c=apps&amp;hl=vi-VN"
+            aria-label="chplay"
+            class="block"
+          >
             <IconGplay class="mx-auto w-80% md:w-full"
           /></a>
-          <a href="https://apps.apple.com/vn/app/my-mobifone/id719320091?l=vi" class="block"
+          <a href="https://apps.apple.com/vn/app/my-mobifone/id719320091?l=vi" aria-label="appstore" class="block"
             ><IconAppStore class="mx-auto w-80% md:w-full"
           /></a>
         </div>
@@ -563,7 +563,7 @@ definePageMeta({
       <div class="max-h-65vh overflow-y-auto">
         <div class="mt-4 px-4 md:(px-10)">
           <h1 class="text-2xl font-bold">{{ modalOptions.data.title }}</h1>
-          <img :src="modalOptions.data.imgUrl" loading="lazy" class="mt-2" />
+          <img :src="modalOptions.data.imgUrl" loading="lazy" alt="data-img" class="mt-2" />
           <p class="mt-1 text-center font-bold text-red-500">
             {{ modalOptions.data.metaData.hotText }}
           </p>
